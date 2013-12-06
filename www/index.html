@@ -5,9 +5,12 @@
         <meta name="format-detection" content="telephone=no" />
         <!--<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />-->
         <title>C4 Logistics</title>
-        <link rel="stylesheet" href="css/jquery.mobile-1.2.0.css" type="text/css" />
+          <link rel="stylesheet" href="css/jquery.mobile-1.2.0.css" type="text/css" />
         <link rel="stylesheet" href="css/c4-styles.css" type="text/css" />
-       <!-- <script type="text/javascript" src="js/cordova-2.6.0.js"></script>-->
+       
+      <!--   <script type="text/javascript" charset="utf-8" src="js/phonegap.js"></script>
+          <script type="text/javascript" src="js/cordova-2.6.0.js"></script> -->
+
         <script type="text/javascript" src="js/jquery.js"></script>
         <script type="text/javascript" src="js/jquery.validate.js"></script>
         <script type="text/javascript" src="js/jquery.mobile.router.js"></script>
@@ -16,7 +19,8 @@
         <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&amp;key=AIzaSyDZCbXECH1dj1lfSALOwWfNHZLE4XOvWS8&libraries=places"></script>
         <script type="text/javascript" src="js/jquery.ui.map.full.min.js"></script>
          <script type="text/javascript" src="js/Jobs.js"></script>
-        
+         
+    
     </head>
     <body>
         
@@ -31,6 +35,8 @@
                 <div id="jobs"  style="border-width:2px; border-color:black; ">
                 JOBS<br />
             <p id="tst">
+            </p>
+            <p id="tst2>
             </p>
         </div>
 
@@ -352,16 +358,40 @@
 
       $(document).bind('mobileinit', onMobileInit);
 
-      //    document.addEventListener("deviceready", onDeviceReady, false);
-      */
+         document.addEventListener("deviceready", onDeviceReady, false);
+     */ 
 
       var tst = document.getElementById("tst");
       var jobs = jobs.getJobs(tst);
-    //  alert(jobs.length);
-    //  for (var i = 0; i < jobs.length; i++) {
-    //      job = jobs[i];
-    //      tst.innerHTML += job.JobNumber + '<br \>';
-    //      
+
+      //var tst2 = document.getElementById("tst2");
+
+
+    //  function onDeviceReady() {
+          alert('a');
+          navigator.geolocation.getCurrentPosition(onSuccess, onError);
     //  }
+
+      // onSuccess Geolocation
+      //
+      function onSuccess(position) {
+          alert('a');
+          var element = document.getElementById('tst2');
+          element.innerHTML = 'Latitude: ' + position.coords.latitude + '<br />' +
+                            'Longitude: ' + position.coords.longitude + '<br />' +
+                            'Altitude: ' + position.coords.altitude + '<br />' +
+                            'Accuracy: ' + position.coords.accuracy + '<br />' +
+                            'Altitude Accuracy: ' + position.coords.altitudeAccuracy + '<br />' +
+                            'Heading: ' + position.coords.heading + '<br />' +
+                            'Speed: ' + position.coords.speed + '<br />' +
+                            'Timestamp: ' + new Date(position.timestamp) + '<br />';
+      }
+
+      // onError Callback receives a PositionError object
+      //
+      function onError(error) {
+          alert('code: ' + error.code + '\n' +
+              'message: ' + error.message + '\n');
+      }
         </script>
 </html>
